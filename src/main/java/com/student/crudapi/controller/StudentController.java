@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -47,5 +48,21 @@ public class StudentController {
 		}
 	}
 	
+	@PutMapping("/students/{std_id}")
+	public String updateStudentById(@PathVariable long std_id, @RequestBody Student student) {
+		Optional<Student> std = stdRepo.findById(std_id);
+		if (std.isPresent()) {
+			Student existStd = std.get();
+			existStd.setStd_name(student.getStd_name());
+			existStd.setStd_rollno(student.getStd_rollno());
+			existStd.setStd_course(student.getStd_course());
+			existStd.setStd_age(student.getStd_age());
+			existStd.setStd_city(student.getStd_city());
+			
+			return "Student Details for Id : " + std_id + "Has Been Updated Successfully.";
+		}else {
+			return "Student Details for Id : " + std_id + " is Not Found.";
+		}
+	}
 
 }
