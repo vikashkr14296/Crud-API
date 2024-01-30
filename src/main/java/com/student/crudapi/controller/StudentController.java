@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -58,11 +59,39 @@ public class StudentController {
 			existStd.setStd_course(student.getStd_course());
 			existStd.setStd_age(student.getStd_age());
 			existStd.setStd_city(student.getStd_city());
+			stdRepo.save(existStd);
 			
-			return "Student Details for Id : " + std_id + "Has Been Updated Successfully.";
+			return "Student Details for Id : " + std_id + " Has Been Updated Successfully.";
 		}else {
 			return "Student Details for Id : " + std_id + " is Not Found.";
 		}
 	}
+	
+	@DeleteMapping("/students/{std_id}")
+	public String deleteStudentById(@PathVariable Long std_id) {
+		stdRepo.deleteById(std_id);
+		return "Student Details for Id : " + std_id + " Has Been Deleted Successfully.";
+	}
+	
+	@DeleteMapping("/students")
+	public String deleteAllStudent() {
+		stdRepo.deleteAll();
+		return "All Student Details Has Been Deleted Successfully.";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
