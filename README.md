@@ -1,4 +1,6 @@
-A demo Crud API for Student Entity
+A demo Crud API for Student Entity Using Spring Boot 
+
+Maven Dependencies : Spring Web, Spring Data JPA and MySQL Driver
 
 So you can,
 
@@ -40,6 +42,8 @@ Sample Data :
 Delete :
 #This can use to delete student by id
 localhost:8080/apis/students/1
-
+    
 #This can use to delete all available student in db
 localhost:8080/apis/students
+
+    
