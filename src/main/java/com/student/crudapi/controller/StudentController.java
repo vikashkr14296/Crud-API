@@ -2,11 +2,13 @@ package com.student.crudapi.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,6 +35,16 @@ public class StudentController {
 		List<Student> stdList = new ArrayList<>();
 		stdRepo.findAll().forEach(stdList::add);
 		return new ResponseEntity<List<Student>>(stdList,HttpStatus.OK);
+	}
+	
+	@GetMapping("/students/{std_id}")
+	public ResponseEntity<Student> getStudentById(@PathVariable long std_id){
+		Optional<Student> std = stdRepo.findById(std_id);
+		if (std.isPresent()) {
+			return new ResponseEntity<Student>(std.get(), HttpStatus.FOUND);
+		}else {
+			return new ResponseEntity<Student>(HttpStatus.NOT_FOUND);
+		}
 	}
 	
 
