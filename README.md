@@ -36,5 +36,10 @@ Sample Data :
       "std_age" : 27,
       "std_city" : "Pune"
     }
+    
+Delete :
+#This can use to delete student by id
+localhost:8080/apis/students/1
 
-
+#This can use to delete all available student in db
+localhost:8080/apis/students
